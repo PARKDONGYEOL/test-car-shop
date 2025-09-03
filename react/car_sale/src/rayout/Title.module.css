@@ -1,0 +1,9 @@
+.title_div{
+  width: 100%;
+}
+
+.title_div > p{
+  margin: auto;
+
+  font-size: 5rem;
+}
