@@ -1,10 +1,10 @@
-package com.green.car_sale.car_sale;
+package com.green.car_shop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CarSaleApplicationTests {
+class CarShopApplicationTests {
 
 	@Test
 	void contextLoads() {
