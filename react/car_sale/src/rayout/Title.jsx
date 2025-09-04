@@ -5,7 +5,7 @@ const Title = () => {
   return (
     <div className={styles.title_div}>
       <p>
-        차량 판매 시스템
+        차량 판매 정보 시스템
       </p>
       </div>
   )

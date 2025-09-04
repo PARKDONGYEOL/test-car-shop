@@ -1,9 +1,10 @@
 .container{
   width: 1000px;
-  border: 1px solid black;
+  margin: 0 auto; 
+  /* border: 1px solid black; */
 }
 
 .header_div{
   height: 10vh;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }

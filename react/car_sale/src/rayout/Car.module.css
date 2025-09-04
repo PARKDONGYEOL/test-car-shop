@@ -1,0 +1,9 @@
+head_div{
+  width: 100%;
+}
+
+.input_div {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
