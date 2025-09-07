@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
+<mapper namespace="com.green.car_shop.sale.mapper.SaleInfoMapper">
+    <resultMap id="buyInfo" type="com.green.car_shop.sale.dto.SaleInfoDTO">
+        <id     column="BUY_NUM"        property="buyNum" />
+        <result column="BUY_NAME"       property="buyName" />
+        <result column="COLOR_NAME"     property="colorName" />
+        <result column="CONTACT_NUM"    property="contactNum" />
+        <result column="BUY_DATE"       property="buyDate" />
+        <association property="carInfoDTO" javaType="com.green.car_shop.car_info.dto.CarInfoDTO">
+            <id     column="MODEL_NUM"  property="modelNum"/>
+            <result column="MODEL_NAME" property="modelName"/>
+            <result column="MAKER_NAME" property="makerName"/>
+            <result column="CAR_PRICE"  property="carPrice"/>
+        </association>
+    </resultMap>
+
+
+    <insert id="buyCarAdd">
+        INSERT INTO SALES_INFO
+        (
+            BUY_NAME,
+            COLOR_NAME,
+            CONTACT_NUM,
+            MODEL_NUM
+        ) VALUES (
+            #{buyName},
+            #{colorName},
+            #{contactNum},
+            (SELECT MODEL_NUM FROM car_info WHERE MODEL_NAME = #{carInfoDTO.modelName})
+        )
+    </insert>
+
+    <select id="getBuyList" resultMap="buyInfo">
+        SELECT
+            s.BUY_NUM,
+            s.BUY_NAME,
+            s.COLOR_NAME,
+            s.CONTACT_NUM,
+            s.MODEL_NUM,
+            TO_CHAR(s.BUY_DATE, 'YYYY.MM.DD HH24:MI') AS BUY_DATE,
+            c.MODEL_NAME,
+            c.MAKER_NAME,
+            c.CAR_PRICE
+        FROM SALES_INFO s
+        INNER JOIN CAR_INFO c
+        ON s.MODEL_NUM = c.MODEL_NUM
+        ORDER BY s.BUY_DATE DESC
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

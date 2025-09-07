@@ -9,5 +9,7 @@ import java.util.List;
 public interface CarInfoMapper {
 
     public void postCarInfo(CarInfoDTO carInfoDTO);
+    public List<CarInfoDTO> getCarInfoList();
+    public List<String> getSelectModel();
 
 }

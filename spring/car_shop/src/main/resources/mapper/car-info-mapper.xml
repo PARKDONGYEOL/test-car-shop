@@ -23,9 +23,20 @@
         )
     </insert>
 
-    <select id="getSelectMaker" resultType="String">
-        SELECT DISTINCT MAKER_NAME FROM car_info
+    <select id="getCarInfoList" resultMap="carInfo">
+        SELECT  MODEL_NUM,
+                MODEL_NAME,
+                MAKER_NAME,
+                CAR_PRICE
+        FROM car_info
+        ORDER BY MODEL_NUM DESC
     </select>
+
+    <select id="getSelectModel" resultType="String">
+        SELECT DISTINCT MODEL_NAME
+        FROM car_info
+    </select>
+
 </mapper>
 
 

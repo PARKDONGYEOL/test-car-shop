@@ -3,10 +3,10 @@ import styles from './HeadMenu.module.css';
 import { NavLink } from 'react-router-dom';
 
 const menuItems = [
-  { to: '/', label: '홈' },
-  { to: '/car', label: '차량관리' },
-  { to: '/register', label: '판매정보등록' },
-  { to: '/sales', label: '판매목록조회' },
+  { to: '/', menu: '홈' },
+  { to: '/car', menu: '차량관리' },
+  { to: '/register', menu: '판매정보등록' },
+  { to: '/sales', menu: '판매목록조회' },
 ];
 
 const HeadMenu = () => {
@@ -20,7 +20,7 @@ const HeadMenu = () => {
             `${styles.menu_item} ${isActive ? styles.active : ''}`
           }
         >
-          {item.label}
+          {item.menu}
         </NavLink>
       ))}
     </div>

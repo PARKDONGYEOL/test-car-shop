@@ -9,7 +9,7 @@ const UserLayout = () => {
       <div className={styles.header_div}>
         <HeadMenu/>
       </div>
-      <div>
+      <div className={styles.body_div}> 
         <Outlet />
       </div>
     </div>

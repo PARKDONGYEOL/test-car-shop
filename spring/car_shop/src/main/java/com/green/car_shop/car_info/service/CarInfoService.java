@@ -15,5 +15,11 @@ public class CarInfoService {
     public void postCarInfo(CarInfoDTO carInfoDTO){
         carInfoMapper.postCarInfo(carInfoDTO);
     }
+    public List<CarInfoDTO> getCarInfoList() {
+        return carInfoMapper.getCarInfoList();
+    }
+    public List<String> getSelectModel(){
+        return carInfoMapper.getSelectModel();
+    }
 
 }

@@ -1,0 +1,31 @@
+.main_table{
+  width: 100%;
+}.main_table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  text-align: center;
+  background-color: #f8fbff; 
+  border: 1px solid #d6e4f0;
+}
+
+.main_table thead {
+  background-color: #3498db; 
+  color: white;
+  font-weight: bold;
+}
+
+.main_table th,
+.main_table td {
+  padding: 12px;
+  border: 1px solid #d6e4f0;
+}
+
+
+.main_table tbody tr:nth-child(odd) {
+  background-color: #eef6fb; 
+}
+
+.main_table tbody tr:nth-child(even) {
+  background-color: #ffffff; 
+}
