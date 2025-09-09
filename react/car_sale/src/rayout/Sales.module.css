@@ -7,7 +7,7 @@
 
 .table_div {
   width: 100%;
-  overflow-x: auto;
+  /* overflow-x: auto; */
 }
 
 .table_div > table {
@@ -15,7 +15,7 @@
   border-collapse: collapse;
   background-color: #ffffff;
   border-radius: 3px;
-  overflow: hidden;
+  /* overflow: hidden; */
   font-size: 1rem;
 }
 
@@ -51,9 +51,9 @@
   background-color: #f0f8ff;
 }
 
-.table_div tbody tr:hover {
+/* .table_div tbody tr:hover {
   background-color: #d0ebff;
-}
+} */
 
 .table_div td {
   color: #333333;

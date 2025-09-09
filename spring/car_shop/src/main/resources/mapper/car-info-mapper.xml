@@ -33,7 +33,7 @@
     </select>
 
     <select id="getSelectModel" resultType="String">
-        SELECT DISTINCT MODEL_NAME
+        SELECT CONCAT(MODEL_NUM, ':', MODEL_NAME, '[', MAKER_NAME, ']') AS NAME
         FROM car_info
     </select>
 

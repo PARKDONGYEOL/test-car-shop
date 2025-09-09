@@ -52,30 +52,49 @@ const Car = () => {
   };
 
   const registerCar = () => {
+    if (!carInfo.makerName || carInfo.makerName === '선택') {
+      showError('제조사를 선택해주세요!');
+      return;
+    }
+    if (!carInfo.modelName || carInfo.modelName.trim() === '') {
+      showError('모델명을 입력해주세요!');
+      return;
+    }
+     
+    if (!carInfo.carPrice || isNaN(Number(carInfo.carPrice))) {
+      showError('차량가격을 올바르게 입력해주세요!');
+      return;
+    }
 
-  if (!carInfo.makerName || carInfo.makerName === '선택') {
-    showError('제조사를 선택해주세요!');
-    return;
-  }
-  if (!carInfo.modelName || carInfo.modelName.trim() === '') {
-    showError('모델명을 입력해주세요!');
-    return;
-  }
-  if (!carInfo.carPrice || isNaN(Number(carInfo.carPrice))) {
-    showError('차량가격을 올바르게 입력해주세요!');
-    return;
-  }    
+    if (Number(carInfo.carPrice) > 2147483647) {
+      showError('차량가격은 2,147,483,647원을 초과할 수 없습니다!');
+      setCarInfo({...carInfo, carPrice: ''});
+      setPriceActive(false);
+      return;
+    }
+
+    const isModelChk = carInfoList.some(car =>
+      car.makerName === carInfo.makerName &&
+      car.modelName === carInfo.modelName
+    );
+    if (isModelChk) {
+      showError('같은 제조사에 중복된 모델등록 할수 없습니다!');
+      setCarInfo({...carInfo, modelName: ''});
+      setModelActive(false);
+      return;
+    }
+        
     axios.post('/api/car', {
       modelName: carInfo.modelName,
       makerName: carInfo.makerName,
       carPrice: Number(carInfo.carPrice)
     })
-      .then(res => {
-        showError('등록되었습니다!');
-        getCarList();
-        setCarInfo({ modelName: '', makerName: '', carPrice: '' });
-      })
-      .catch(e => console.log(e));
+    .then(res => {
+      showError('등록되었습니다!');
+      getCarList();
+      setCarInfo({ modelName: '', makerName: '', carPrice: '' });
+    })
+    .catch(e => console.log(e));
   };
 
   const handleCarData = (e) => {

@@ -20,17 +20,18 @@ const Register = () => {
     buyName    : '',
     colorName  : '선택',
     contactNum : '',
-    carInfoDTO : { modelName: ''}
+    modelNum   : ''
+
   });
 
-  const [selectList, setSelectList] = useState(['선택']);
+  const [selectList, setSelectList] = useState(['']);
 
   const handlSaleData = (e) => {
     const { name, value } = e.target;
-    if (name === "modelName") {
+    if (name === "modelNum") {
       setSaleInfo({
         ...saleInfo,
-        carInfoDTO: {...saleInfo.carInfoDTO, modelName: value}
+        modelNum: Number(value)
       });
     } else {
       setSaleInfo({
@@ -58,21 +59,21 @@ const Register = () => {
     return (
       saleInfo.buyName.trim() !== '' &&
       saleInfo.colorName !== '' && saleInfo.colorName !== '선택' &&
-      saleInfo.carInfoDTO.modelName !== '' && saleInfo.carInfoDTO.modelName !== '선택'
+      saleInfo.modelNum !== null && saleInfo.modelNum !== ''
     );
   };
 
 
   useEffect(() => {
-
     axios.get('/api/car')
-    .then(res => {
-      setBtnDisable(!isValid());
-      setSelectList(res.data);
-    })
-    .catch(e=>console.log(e))    
+      .then(res => {
+        setSelectList(res.data);
+      })
+      .catch(e => console.log(e));
+  }, []); 
 
-
+  useEffect(() => {
+    setBtnDisable(!isValid());
   }, [saleInfo]);
 
   const showError = (msg) => {
@@ -91,7 +92,7 @@ const registerSale = () => {
     return;
   }
 
-  if (!saleInfo.carInfoDTO.modelName || saleInfo.carInfoDTO.modelName === '선택') {
+  if (!saleInfo.modelNum || saleInfo.modelNum === '선택') {
     showError('모델을 선택해주세요!');
     return;
   }
@@ -150,9 +151,9 @@ const registerSale = () => {
         <div className={styles.item_div}>
           <div>모델</div>
           <Select size='50%'
-            name='modelName'
+            name='modelNum'
             bgColor={modelActive ? '#e8f0fe' : 'white'}
-            value={saleInfo.modelName}
+            value={saleInfo.modelNum}
             onChange={(e) => {
               handlSaleData(e);
               setModelActive(e.target.value !== '선택' && e.target.value !== '');
@@ -160,9 +161,12 @@ const registerSale = () => {
           >
             <option value='선택'>선택</option>
             {
-              selectList.map((data, index) => (
-                <option key={index} value={data}>{data}</option>
-              ))
+              selectList.map((data, index) => {
+                const [modelNum, modelName] = data.split(':');
+                return(
+                <option key={index} value={modelNum}>{modelName}</option>
+                )
+              })
             }
           </Select>
         </div>
