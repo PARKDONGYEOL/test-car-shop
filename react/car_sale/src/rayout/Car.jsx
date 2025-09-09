@@ -11,6 +11,8 @@ import CarList from './CarList';
 const Car = () => {
   const [btnDisable, setBtnDisable] = useState(false);
   const [makerActive, setMakerActive] = useState(false);
+  const [modelActive, setModelActive] = useState(false);
+  const [priceActive, setPriceActive] = useState(false);
   const [carInfo, setCarInfo] = useState({
     modelName: '',
     makerName: '선택',
@@ -114,8 +116,12 @@ const Car = () => {
             type="text"
             size='80%'
             name='modelName'
+            bgColor={modelActive ? '#e8f0fe' : 'white'}
             value={carInfo.modelName}
-            onChange={handleCarData}
+            onChange={(e) => {
+              handleCarData(e);
+              setModelActive(e.target.value !== null && e.target.value !== '');
+            }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') registerCar();
             }}            
@@ -127,8 +133,12 @@ const Car = () => {
             type="text"
             size='75%'
             name='carPrice'
+            bgColor={priceActive ? '#e8f0fe' : 'white'}
             value={carInfo.carPrice ? Number(carInfo.carPrice).toLocaleString() : ''}
-            onChange={handleCarData} 
+            onChange={(e) => {
+              handleCarData(e);
+              setPriceActive(e.target.value !== null && e.target.value !== '');
+            }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') registerCar();
             }}

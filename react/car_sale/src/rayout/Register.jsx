@@ -14,6 +14,8 @@ const Register = () => {
   const [btnDisable, setBtnDisable] = useState(false);
   const [modelActive, setModelActive] = useState(false);
   const [colorActive, setColorActive] = useState(false);
+  const [contactActive, setContactActive] = useState(false);
+  const [nameActive, setNameActive] = useState(false);
   const [saleInfo, setSaleInfo] = useState({
     buyName    : '',
     colorName  : '선택',
@@ -48,6 +50,7 @@ const Register = () => {
       if (!regex.test(e.target.value)) {
         showError('연락처 형식이 올바르지 않습니다. EX) 010-1234-5678');
         setSaleInfo(old => ({ ...old, contactNum: '' }));
+        setContactActive(false);
       }}
   };
 
@@ -117,7 +120,11 @@ const registerSale = () => {
             size='50%'
             name='buyName'
             value={saleInfo.buyName}
-            onChange={handlSaleData}
+            bgColor={nameActive ? '#e8f0fe' : 'white'}
+            onChange={(e) => {
+              handlSaleData(e);
+              setNameActive(e.target.value !== null && e.target.value !== '');
+            }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') registerSale();
             }}                 
@@ -166,7 +173,11 @@ const registerSale = () => {
             size='50%'
             name='contactNum'
             value={saleInfo.contactNum}
-            onChange={handlSaleData}
+            bgColor={contactActive ? '#e8f0fe' : 'white'}
+            onChange={(e) => {
+              handlSaleData(e);
+              setContactActive(e.target.value !== null && e.target.value !== '');
+            }}
             onBlur={handleBlur}
             onKeyDown={(e) => {
               if (e.key === 'Enter') handleBlur(e);
