@@ -30,7 +30,7 @@
             #{buyName},
             #{colorName},
             #{contactNum},
-            (SELECT MODEL_NUM FROM car_info WHERE MODEL_NAME = #{carInfoDTO.modelName})
+            (SELECT MODEL_NUM FROM car_info WHERE MODEL_NAME = #{carInfoDTO.modelName} LIMIT 1)
         )
     </insert>
 

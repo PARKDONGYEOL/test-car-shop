@@ -149,8 +149,7 @@ const Car = () => {
         </div>
       </div>
       {
-        carInfoList && carInfoList.length > 0 && (
-          <div>
+        <div>
             <PageTitle 
               title='등록된차량목록' 
               size='100%' 
@@ -160,7 +159,6 @@ const Car = () => {
             />
             <CarList carInfoList={carInfoList} />
           </div>
-        )
       }
       <Modal
         size="400px"
